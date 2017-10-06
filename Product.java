@@ -1,7 +1,8 @@
 
-public class Product {
-	private transient String productCode;
-	private transient String productType;
+public abstract class Product {
+	private String productCode;
+	private String productType;
+	private int units;
 
 	public Product(){}
 	
@@ -9,6 +10,14 @@ public class Product {
 	public Product(String productCode, String productType) {
 		this.productCode = productCode;
 		this.productType = productType;
+	}
+
+	public int getUnits() {
+		return units;
+	}
+
+	public void setUnits(int units) {
+		this.units = units;
 	}
 
 	// getters and setters
@@ -25,5 +34,11 @@ public class Product {
 	public String getProductType(){
 		return this.productType;
 	}
-	// other methods
+	// abstract methods
+
+	// TODO calculate and return subtotal (takes current date as argument)
+	
+	// TODO calculate and return tax rate
+	
+	//TODO calculate and return total (subtotal plus tax)
 }

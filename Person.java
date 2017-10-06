@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Persons {
+public class Person {
 	private String personCode;
 	private String firstName;
 	private String lastName;
@@ -8,13 +8,13 @@ public class Persons {
 	private ArrayList<String> email;
 	
 	//Constructor
-	public Persons(String personCode, String firstName, String lastName, Address address){
+	public Person(String personCode, String firstName, String lastName, Address address){
 		this.personCode = personCode;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
 	}
-	public Persons(Persons aPerson){
+	public Person(Person aPerson){
 		this.personCode = aPerson.getPersonCode();
 		this.firstName = aPerson.getFirstName();
 		this.lastName = aPerson.getLastName();

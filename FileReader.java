@@ -5,71 +5,71 @@ import java.util.ArrayList;
 	import java.util.Scanner;
 
 	public class FileReader {
-		ArrayList<Persons> personList = new ArrayList<Persons>();
+		ArrayList<Person> personList = new ArrayList<Person>();
 		ArrayList<Customer> customerList = new ArrayList<Customer>();
 		ArrayList<Product> productList = new ArrayList<Product>();
 				
 		
-		public ArrayList<Persons> readPersons() {
-		Scanner sc = null;
-			
-			try {
-				sc = new Scanner(new File("data/Persons.dat"));
-				sc.nextLine(); // reads the number of records from the first line
+		public ArrayList<Person> readPerson() {
+			Scanner sc = null;
+				
+				try {
+					sc = new Scanner(new File("data/Person.dat"));
+					sc.nextLine(); // reads the number of records from the first line
 
-				while(sc.hasNext()) {
-					String line = sc.nextLine(); // reads each line starting from 2nd line
-					String data[] = line.split(";"); // tokenizes the line and stores in a string array 
-					
-					// Stores the 4 array elements of each line into strings
-					String personCode = data[0];
-					String name = data[1];
-					String address = data[2];
-					String email = null;
-					if(data.length == 4){
-						email = data[3];
+					while(sc.hasNext()) {
+						String line = sc.nextLine(); // reads each line starting from 2nd line
+						String data[] = line.split(";"); // tokenizes the line and stores in a string array 
+						
+						// Stores the 4 array elements of each line into strings
+						String personCode = data[0];
+						String name = data[1];
+						String address = data[2];
+						String email = null;
+						if(data.length == 4){
+							email = data[3];
+						}
+						
+						
+						// Creates an Address object
+						String addressArray[] = address.split(",");
+						String street = addressArray[0];
+						String city = addressArray[1];
+						String state = addressArray[2];
+						String zip = addressArray[3];
+						Address addressObject;
+						if(addressArray.length == 5){
+							String country = addressArray[4];
+							addressObject = new Address(street, city, state, zip, country);
+						}else{
+						
+						addressObject = new Address(street, city, state, zip);
+						}
+						// Creates a Person object
+						//split up name
+						String nameArray[] = name.split(",");
+						String firstName = nameArray[1];
+						String lastName = nameArray[0];
+			
+						Person person = new Person(personCode, firstName, lastName, addressObject);
+						
+						if(data.length == 4){
+							person.addEmail(email);
+						}
+						
+						// Adds the Person object into Person ArrayList
+						personList.add(person);
 					}
+					sc.close();
+					return personList;
 					
 					
-					// Creates an Address object
-					String addressArray[] = address.split(",");
-					String street = addressArray[0];
-					String city = addressArray[1];
-					String state = addressArray[2];
-					String zip = addressArray[3];
-					Address addressObject;
-					if(addressArray.length == 5){
-						String country = addressArray[4];
-						addressObject = new Address(street, city, state, zip, country);
-					}else{
 					
-					addressObject = new Address(street, city, state, zip);
-					}
-					// Creates a Persons object
-					//split up name
-					String nameArray[] = name.split(",");
-					String firstName = nameArray[1];
-					String lastName = nameArray[0];
-		
-					Persons person = new Persons(personCode, firstName, lastName, addressObject);
-					
-					if(data.length == 4){
-						person.addEmail(email);
-					}
-					
-					// Adds the Person object into Person ArrayList
-					personList.add(person);
-				}
-				sc.close();
-				return personList;
-				
-				
-				
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-				return null;
-			}	
-		}
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+					return null;
+				}	
+			}
 		
 		public ArrayList<Customer> readCustomers() {
 			Scanner sc = null;
@@ -84,6 +84,7 @@ import java.util.ArrayList;
 						
 						// Stores the 4 array elements of each line into strings
 						String customerCode = data[0];
+						String customerType = data[1];
 						String primaryContact = data[2];
 						String name = data[3];
 						String address = data[4];
@@ -105,19 +106,21 @@ import java.util.ArrayList;
 							addressObject = new Address(street, city, state, zip);
 						}
 
-						Persons personObject = null;
+						Person personObject = null;
 						
-						for (Persons aPerson : personList) {
+						for (Person aPerson : personList) {
 							
 							if(aPerson.getPersonCode().equals(primaryContact)) {
-								personObject = new Persons(aPerson.getPersonCode(), aPerson.getFirstName(), aPerson.getLastName(), aPerson.getAddress());
+								personObject = new Person(aPerson.getPersonCode(), aPerson.getFirstName(), aPerson.getLastName(), aPerson.getAddress());
 							}
 						}
 						
-
-					
-						Customer newCustomer = new Customer(customerCode, personObject, name, addressObject);
-											
+						Customer newCustomer;
+						if(customerType.equals("S")){
+							newCustomer = new Student(customerCode, personObject, name, addressObject);
+						} else {
+							newCustomer = new General(customerCode, personObject, name, addressObject);
+						}
 						// Adds the Customer object into Customer ArrayList
 						customerList.add(newCustomer);
 					}
@@ -159,9 +162,9 @@ import java.util.ArrayList;
 							String zip = addressArray[3];
 							String country = addressArray[4];
 							Address addressObject = null;
-							if(addressArray.length == 5){
+						if(addressArray.length == 5){
 								addressObject = new Address(street, city, state, zip, country);
-							}else{
+						}else{
 							
 							addressObject = new Address(street, city, state, zip);
 							}
@@ -182,7 +185,7 @@ import java.util.ArrayList;
 							String name = data[2];
 							String cost = data[3];
 							//create refreshment object
-							newProduct = new Refreshments(code, type, name, cost);
+							newProduct = new Refreshment(code, type, name, cost);
 						
 						}else{
 							String parkingFee = data[2];
@@ -205,6 +208,7 @@ import java.util.ArrayList;
 					return null;
 				}	
 			}
+		// TODO method for instantiating invoices
 	}
 
 
