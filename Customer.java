@@ -1,12 +1,12 @@
-public class Customer {
+public abstract class Customer {
 	private String customerCode;//alpha-numerics
-	private Persons contactPerson;//person assigned as a contact
+	private Person contactPerson;//person assigned as a contact
 	private String name;
 	private Address address;
 	
 	
 	//Constructor
-	public Customer(String customerCode, Persons contactPerson, String name, Address address){
+	public Customer(String customerCode, Person contactPerson, String name, Address address){
 		this.customerCode = customerCode;
 		this.contactPerson = contactPerson;
 		this.name = name;
@@ -18,7 +18,7 @@ public class Customer {
 	}
 	
 	
-	public void setPersonContact(Persons contactPerson){
+	public void setPersonContact(Person contactPerson){
 		this.contactPerson = contactPerson;
 	}
 	public void setName(String name){
@@ -37,7 +37,7 @@ public class Customer {
 		return this.customerCode;
 	}
 	
-	public Persons getContactPersons(){
+	public Person getContactPerson(){
 		return this.contactPerson;
 	}
 	
@@ -51,7 +51,9 @@ public class Customer {
 	}
 	
 	
+	//TODO calculate reimbursement (nonexistent for General)
 	
+	//TODO calculating fees (nonexistent for General)
 	
 	
 	

@@ -1,10 +1,9 @@
 
-public class SeasonPass extends Product {
+public class SeasonPass extends Ticket{
 
 		// TODO Auto-generated constructor stub
 	
-	private String productCode;
-	private String productType;
+
 	private String name;
 	private String startDate;
 	private String endDate;
@@ -13,8 +12,6 @@ public class SeasonPass extends Product {
 	// Constructor
 	public SeasonPass(String productCode, String productType, String name, String startDate, String endDate, String cost){
 		super(productCode, productType);
-		this.productCode = productCode;
-		this.productType = productType;
 		this.name = name;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -22,14 +19,6 @@ public class SeasonPass extends Product {
 }
 
 	// setters
-	public void setProductCode(String productCode) {
-		this.productCode = productCode;
-	}
-
-	public void setProductType(String productType) {
-		this.productType = productType;
-	}	
-	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -48,14 +37,6 @@ public class SeasonPass extends Product {
 
 	
 	// getters
-	public String getProductCode() {
-		return this.productCode;
-	}
-
-	public String getProductType() {
-		return this.productType;
-	}
-
 	public String getName() {
 		return this.name;
 	}
@@ -64,14 +45,16 @@ public class SeasonPass extends Product {
 		return this.startDate;
 	}
 
-	public String setEndDate() {
+	public String getEndDate() {
 		return this.endDate;
 	}
 
 	public String getCost() {
 		return this.cost;
 	}
-
-	// other methods
-
+	//fixed cost based on season
+	//if before, fixed price
+	// TODO if between certain dates, discount based on days remaining until end (in subtotal)
+	//if after, error
+	//$8 processing fee per unit
 }

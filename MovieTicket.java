@@ -1,7 +1,6 @@
 
-public class MovieTicket extends Product {
-	private String productCode;
-	private String productType;
+public class MovieTicket extends Ticket {
+
 	private String dateTime;
 	private String movieName;
 	private Address address;
@@ -12,8 +11,6 @@ public class MovieTicket extends Product {
 	public MovieTicket(String productCode, String productType, String dateTime, String movieName, Address address,
 			String screenNumber, String pricePerUnit) {
 		super(productCode, productType);
-		this.productCode = productCode;
-		this.productType = productType;
 		this.dateTime = dateTime;
 		this.movieName = movieName;
 		this.address = address;
@@ -23,14 +20,7 @@ public class MovieTicket extends Product {
 
 	
 	// setters
-	public void setProductCode(String productCode) {
-		this.productCode = productCode;
-	}
-
-	public void setProductType(String productType) {
-		this.productType = productType;
-	}
-
+	
 	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
 	}
@@ -53,14 +43,6 @@ public class MovieTicket extends Product {
 
 	
 	// getters
-	public String getProductCode() {
-		return this.productCode;
-	}
-
-	public String getProductType() {
-		return this.productType;
-	}
-
 	public String getDateTime() {
 		return this.dateTime;
 	}
@@ -80,4 +62,7 @@ public class MovieTicket extends Product {
 	public String getPricePerUnit() {
 		return this.pricePerUnit;
 	}
+	
+	//TODO discount on certain days
+	//priceperunit*units
 }
