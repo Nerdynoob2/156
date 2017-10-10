@@ -6,5 +6,15 @@ public class General extends Customer{
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public double getReimbursement() {
+		return 0;
+	}
+
+	@Override
+	public double getFee() {
+		return 0;
+	}
+
 	
 }

@@ -5,5 +5,17 @@ public class Student extends Customer{
 		super(customerCode, contactPerson, name, address);
 		// TODO Auto-generated constructor stub
 	}
+
+	@Override
+	public double getReimbursement() {
+		// TODO calculate reimbursement
+		return 0;
+	}
+
+	@Override
+	public double getFee() {
+		// TODO calculate fee
+		return 0;
+	}
 	
 }

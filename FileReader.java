@@ -8,6 +8,7 @@ import java.util.ArrayList;
 		ArrayList<Person> personList = new ArrayList<Person>();
 		ArrayList<Customer> customerList = new ArrayList<Customer>();
 		ArrayList<Product> productList = new ArrayList<Product>();
+		// TODO add ArrayList of invoices
 				
 		
 		public ArrayList<Person> readPerson() {
@@ -209,6 +210,7 @@ import java.util.ArrayList;
 				}	
 			}
 		// TODO method for instantiating invoices
+		// ** base off of existing structure for products, customers, etc.
 	}
 
 

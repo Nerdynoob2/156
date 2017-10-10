@@ -62,6 +62,27 @@ public class MovieTicket extends Ticket {
 	public String getPricePerUnit() {
 		return this.pricePerUnit;
 	}
+
+
+	@Override
+	public double getSubtotal(String currentDate) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public double getTaxRate() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public double getTotal(String currentDate) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	//TODO discount on certain days
 	//priceperunit*units

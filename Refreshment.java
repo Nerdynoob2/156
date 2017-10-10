@@ -30,6 +30,27 @@ public class Refreshment extends Service{
 	public String getCost() {
 		return this.cost;
 	}
+
+
+	@Override
+	public double getSubtotal(String currentDate) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public double getTaxRate() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public double getTotal(String currentDate) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 	//cost. duh
