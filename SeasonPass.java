@@ -57,4 +57,22 @@ public class SeasonPass extends Ticket{
 	// TODO if between certain dates, discount based on days remaining until end (in subtotal)
 	//if after, error
 	//$8 processing fee per unit
+
+	@Override
+	public double getSubtotal(String currentDate) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getTaxRate() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getTotal(String currentDate) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

@@ -52,9 +52,9 @@ public abstract class Customer {
 	
 	
 	//TODO calculate reimbursement (nonexistent for General)
-	
+	public abstract double getReimbursement();
 	//TODO calculating fees (nonexistent for General)
-	
+	public abstract double getFee();
 	
 	
 }
