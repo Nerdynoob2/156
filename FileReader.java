@@ -211,6 +211,9 @@ import java.util.ArrayList;
 			}
 		// TODO method for instantiating invoices
 		// ** base off of existing structure for products, customers, etc.
+		
+		
+		//modify customer to distinguish between student and general
 	}
 
 
