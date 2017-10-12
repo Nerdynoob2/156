@@ -2,10 +2,10 @@
 public class Refreshment extends Service{
 
 	private String name;
-	private String cost;
+	private double cost;
 
 	// Constructor
-	public Refreshment(String productCode, String productType, String name, String cost) {
+	public Refreshment(String productCode, String productType, String name, double cost) {
 		super(productCode, productType);
 		this.name = name;
 		this.cost = cost;
@@ -17,7 +17,7 @@ public class Refreshment extends Service{
 		this.name = name;
 	}
 
-	public void setCost(String cost) {
+	public void setCost(double cost) {
 		this.cost = cost;
 	}
 
@@ -27,29 +27,26 @@ public class Refreshment extends Service{
 		return this.name;
 	}
 
-	public String getCost() {
+	public double getCost() {
 		return this.cost;
 	}
 
 
 	@Override
 	public double getSubtotal(String currentDate) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.cost;
 	}
 
 
 	@Override
-	public double getTaxRate() {
-		// TODO Auto-generated method stub
-		return 0;
+	public double getTax() {
+		return this.cost * .04;
 	}
 
 
 	@Override
 	public double getTotal(String currentDate) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.getSubtotal(currentDate) + this.getTax();
 	}
 	
 	

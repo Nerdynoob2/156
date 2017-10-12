@@ -3,14 +3,15 @@ public class SeasonPass extends Ticket{
 
 		// TODO Auto-generated constructor stub
 	
-
+	
 	private String name;
 	private String startDate;
 	private String endDate;
-	private String cost;
-
+	private double cost;
+	
+	
 	// Constructor
-	public SeasonPass(String productCode, String productType, String name, String startDate, String endDate, String cost){
+	public SeasonPass(String productCode, String productType, String name, String startDate, String endDate, double cost){
 		super(productCode, productType);
 		this.name = name;
 		this.startDate = startDate;
@@ -31,7 +32,7 @@ public class SeasonPass extends Ticket{
 		this.endDate = endDate;
 	}
 
-	public void setCost(String cost) {
+	public void setCost(double cost) {
 		this.cost = cost;
 	}
 
@@ -49,7 +50,7 @@ public class SeasonPass extends Ticket{
 		return this.endDate;
 	}
 
-	public String getCost() {
+	public double getCost() {
 		return this.cost;
 	}
 	//fixed cost based on season
@@ -60,19 +61,16 @@ public class SeasonPass extends Ticket{
 
 	@Override
 	public double getSubtotal(String currentDate) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.cost;
 	}
 
 	@Override
-	public double getTaxRate() {
-		// TODO Auto-generated method stub
-		return 0;
+	public double getTax() {
+		return this.cost * .06;
 	}
 
 	@Override
 	public double getTotal(String currentDate) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.getSubtotal(currentDate) + this.getTax();
 	}
 }

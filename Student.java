@@ -7,15 +7,13 @@ public class Student extends Customer{
 	}
 
 	@Override
-	public double getReimbursement() {
-		// TODO calculate reimbursement
-		return 0;
+	public double getDiscount() {
+		return .08;
 	}
 
 	@Override
 	public double getFee() {
-		// TODO calculate fee
-		return 0;
+		return 6.75;
 	}
 	
 }
