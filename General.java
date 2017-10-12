@@ -7,7 +7,7 @@ public class General extends Customer{
 	}
 
 	@Override
-	public double getReimbursement() {
+	public double getDiscount() {
 		return 0;
 	}
 
