@@ -20,7 +20,7 @@ public class Invoice {
 		this.customer = customer;
 		this.salesperson = salesperson;
 		this.productList = productList;
-		this.currentDate = currentDate;
+		this.invoiceDate = currentDate;
 	}
 	
 	public String getInvoiceCode() {
@@ -57,11 +57,19 @@ public class Invoice {
 
 	
 
-	public double getSubtotal(String currentDate){
+	public String getInvoiceDate() {
+		return invoiceDate;
+	}
+
+	public void setInvoiceDate(String invoiceDate) {
+		this.invoiceDate = invoiceDate;
+	}
+
+	public double getSubtotal(){
 		//sum of subtotals of all products in list
 		double sum=0;
 		for(Product product : this.productList){
-			sum = sum + product.getSubtotal(currentDate);
+			sum = sum + product.getSubtotal(this.getInvoiceDate());
 		}
 		return sum;
 	}
@@ -75,22 +83,23 @@ public class Invoice {
 	public double getTaxes(){
 		double sum=0;
 		for(Product product : this.productList){
-			sum = sum + product.getTax();
+			sum = sum + product.getTax(this.getInvoiceDate());
 		}
 		return sum;
 	}
 	
 	//discount
 	public double getReimbursement(){
-		return this.customer.getDiscount() * this.getSubtotal(this.invoiceDate);
+		return this.customer.getDiscount() * this.getSubtotal();
 	}
 	
 	//total
 	public double getTotal(){
-		return this.getSubtotal(this.invoiceDate) - this.getTaxes() 
+		return this.getSubtotal() - this.getTaxes() 
 					- this.getFees() + this.getReimbursement();		
 	}
 	
 	// TODO check for all other methods of calculation!!
+	//TODO check for misc. methods needed
 	
 }
