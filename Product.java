@@ -35,11 +35,13 @@ public abstract class Product {
 		return this.productType;
 	}
 	// abstract methods
+	
+	public abstract Product returnItself();
 
 	// TODO calculate and return subtotal (takes current date as argument)
 	public abstract double getSubtotal(String currentDate);
 	// TODO calculate and return tax rate
-	public abstract double getTax();
+	public abstract double getTax(String currentDate);
 	//TODO calculate and return total (subtotal plus tax)
 	public abstract double getTotal(String currentDate);
 

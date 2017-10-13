@@ -101,16 +101,17 @@ public class MovieTicket extends Ticket {
 
 
 	@Override
-	public double getTax() {
+	public double getTax(String currentDate) {
 		return this.getSubtotal(currentDate) * .06;
 	}
 
 
 	@Override
 	public double getTotal(String currentDate) {
-		return this.getSubtotal(currentDate) + this.getTax();
+		return this.getSubtotal(currentDate) + this.getTax(currentDate);
 	}
 	
-	//TODO discount on certain days
-	//priceperunit*units
+	public MovieTicket returnItself() {
+		return this;
+	}
 }

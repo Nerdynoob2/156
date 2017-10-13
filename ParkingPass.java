@@ -30,18 +30,21 @@ public class ParkingPass extends Service{
 
 
 	@Override
-	public double getTax() {
+	public double getTax(String currentDate) {
 		return this.parkingFee * .04;
 	}
 
 
 	@Override
 	public double getTotal(String currentDate) {
-		return this.getSubtotal(currentDate) + this.getTax();
+		return this.getSubtotal(currentDate) + this.getTax(currentDate);
 	}
 	
 	
 	//fixed cost
-	
+	@Override
+	public ParkingPass returnItself() {
+		return this;
+	}
 	
 }

@@ -39,19 +39,22 @@ public class Refreshment extends Service{
 
 
 	@Override
-	public double getTax() {
+	public double getTax(String currentDate) {
 		return this.cost * .04;
 	}
 
 
 	@Override
 	public double getTotal(String currentDate) {
-		return this.getSubtotal(currentDate) + this.getTax();
+		return this.getSubtotal(currentDate) + this.getTax(currentDate);
 	}
 	
 	
 	//cost. duh
-	
+	@Override
+	public Refreshment returnItself() {
+		return this;
+	}
 	
 	
 	
