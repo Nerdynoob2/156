@@ -102,4 +102,63 @@ public class Invoice {
 	// TODO check for all other methods of calculation!!
 	//TODO check for misc. methods needed
 	
+	public void itemDetail(){
+			
+		//season pass: check if it was prorated, for how many days
+		//refreshments: if 1+ ticket/season pass purchased, 5% discount
+		//parking pass: if movie ticket or season pass, parking ticket is free
+		for(Product product : this.productList){
+			if(product.getProductType().equals("M")){
+				MovieTicket movieTicket;
+				movieTicket = (MovieTicket) product;
+				System.out.printf("%-15s MovieTicket '%s' @ %s %90s %-14f $ %-14f $ %-14f", 
+								movieTicket.getProductCode(), movieTicket.getMovieName(), movieTicket.getAddress().getStreet(),
+								"$", movieTicket.getSubtotal(this.invoiceDate)*movieTicket.getUnits(), movieTicket.getTax(this.invoiceDate)*movieTicket.getUnits(),
+								movieTicket.getTotal(this.invoiceDate)*movieTicket.getUnits());
+				System.out.printf("\n");
+				if(movieTicket.discountCheck(this.invoiceDate)){
+					System.out.printf("%15s (%d units @ $%f/unit - Tue/Thu 7% off)", movieTicket.getDateTime(), movieTicket.getUnits(), movieTicket.getPricePerUnit());
+				}
+				else{
+					System.out.printf("%15s (%d units @ $%f/unit)", movieTicket.getDateTime(), movieTicket.getUnits(), movieTicket.getPricePerUnit());
+				}
+				System.out.printf("\n");
+			}
+			
+			//season pass
+			//refreshments
+			//parking pass
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		}
+	}
+	
 }

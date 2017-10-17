@@ -56,6 +56,10 @@ public class Person {
 		return this.email;
 	}
 	
+	public String getFullName(){
+		return this.getLastName() + ", " + this.getFirstName();
+	}
+	
 	//method for adding email
 	
 	public void addEmail(String email){

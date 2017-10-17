@@ -272,9 +272,10 @@ import java.util.ArrayList;
 							 */
 							for(Product testProduct : productList) {
 								if(testProduct.getProductCode().equals(objectCode)){
-									for(int i=0;i<count;i++) {
+								
 										productListLocal.add(testProduct);
-									}
+										testProduct.setUnits(count);
+									
 								}
 							}
 						}

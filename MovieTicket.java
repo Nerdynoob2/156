@@ -98,6 +98,13 @@ public class MovieTicket extends Ticket {
 			return this.pricePerUnit;			
 		}
 	}
+	
+	public Boolean discountCheck(String currentDate){
+		if(this.discount(currentDate)==1){
+			return true;
+		}
+		return false;
+	}
 
 
 	@Override
@@ -114,4 +121,6 @@ public class MovieTicket extends Ticket {
 	public MovieTicket returnItself() {
 		return this;
 	}
+	
+	
 }
