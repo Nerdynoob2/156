@@ -90,13 +90,16 @@ public class Invoice {
 	
 	//discount
 	public double getReimbursement(){
-		return this.customer.getDiscount() * this.getSubtotal();
+		return -1 * (this.customer.getDiscount() * this.getSubtotal() + this.getTaxes());
 	}
 	
 	//total
 	public double getTotal(){
-		return this.getSubtotal() - this.getTaxes() 
-					- this.getFees() + this.getReimbursement();		
+		return this.getSubtotal() + this.getTaxes(); 	
+	}
+	
+	public double getGrandTotal(){
+		return this.getTotal()  + this.getFees() + this.getReimbursement();	
 	}
 	
 	// TODO check for all other methods of calculation!!
@@ -127,15 +130,7 @@ public class Invoice {
 		
 		for(Product product : this.productList){
 			if(product instanceof MovieTicket){
-				/*
-				 * 
-				 * 
-				 * 
-				 * this shit right here |
-				 * 						|
-				 * 						|
-				 * 						V
-				 */
+				
 				MovieTicket movieTicket = null;
 				movieTicket = (MovieTicket) product;
 				
@@ -157,17 +152,9 @@ public class Invoice {
 				
 				
 			} else if(product instanceof ParkingPass){
-				/*
-				 * 
-				 * 
-				 * 
-				 * this shit right here |
-				 * 						|
-				 * 						|
-				 * 						V
-				 */
+				
 				ParkingPass parkingPass = null;
-				//parkingPass = (ParkingPass) product;
+				parkingPass = (ParkingPass) product;
 				
 				//ParkingPass parkingPass = product.returnItself();
 				Boolean movieTicketExists;
@@ -191,15 +178,7 @@ public class Invoice {
 				System.out.printf("%90s %-15f $ %-15f $ %-15f", "$", parkingPass.getSubtotal(this.invoiceDate) * parkingPass.getUnits(), parkingPass.getTax(this.invoiceDate) * parkingPass.getUnits(), parkingPass.getTotal(this.numMovieTickets()));
 				System.out.println();
 			} else if(product instanceof SeasonPass){
-				/*
-				 * 
-				 * 
-				 * 
-				 * this shit right here |
-				 * 						|
-				 * 						|
-				 * 						V
-				 */
+				
 				SeasonPass seasonPass = null;
 				seasonPass = (SeasonPass) product;
 				
@@ -215,16 +194,9 @@ public class Invoice {
 				System.out.printf("\n");
 				
 				
-			} else if(product instanceof ParkingPass){
-				/*
-				 * 
-				 * 
-				 * 
-				 * this shit right here |
-				 * 						|
-				 * 						|
-				 * 						V
-				 */
+			} else if(product instanceof Refreshment){
+			
+				//if movie ticket, 5% discount
 				Refreshment refreshment = null;
 				refreshment = (Refreshment) product;
 				Boolean movieTicketExists;
@@ -234,23 +206,24 @@ public class Invoice {
 					movieTicketExists = true;
 				}
 				
-				System.out.printf("%-15s refreshment", 
-								refreshment.getProductCode(), refreshment.getProductCode());
+				System.out.printf("%s %-15s", 
+								refreshment.getProductCode(), refreshment.getName());
+				
 				//movie ticket check
 				if(movieTicketExists) {
-					System.out.printf("%s (%d units @ $%.2f with %d free)", this.movieTicketCode(), refreshment.getUnits(), refreshment.getParkingFee(), this.numMovieTickets() );
+					System.out.printf("(%d units @ $%.2f with 5% off)", refreshment.getUnits(), refreshment.getCost());
+					refreshment.setCost(refreshment.getCost()*.95);
 				} else {
-					System.out.printf("%s (%d units @ $%.2f)", this.movieTicketCode(), refreshment.getUnits(), refreshment.getParkingFee());
+					System.out.printf("(%d units @ $%.2f)", refreshment.getUnits(), refreshment.getCost());
 				}
-				//subtotal, tax, total
-				//this.getTotal( PASS INT );
+	
 				
-				System.out.printf("%90s %-15f $ %-15f $ %-15f", "$", refreshment.getSubtotal(this.invoiceDate) * refreshment.getUnits(), refreshment.getTax(this.invoiceDate) * refreshment.getUnits(), refreshment.getTotal(this.numMovieTickets()));
+				System.out.printf("%90s %-15f $ %-15f $ %-15f", "$", refreshment.getSubtotal(this.invoiceDate) * refreshment.getUnits(), refreshment.getTax(this.invoiceDate) * refreshment.getUnits(), refreshment.getTotal(this.invoiceDate));
 				System.out.println();
 			} 
 			
 			
-			//refreshments
+			
 		
 			
 			

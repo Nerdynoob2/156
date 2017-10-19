@@ -45,9 +45,9 @@ public class Report {
 			System.out.println("Salesperson: " + invoice.getSalesperson().getFullName());
 			System.out.println("Customer Info: \n\t" + invoice.getCustomer().getName() + 
 					" ("+ invoice.getCustomer().getCustomerCode() + ")");
-			if(invoice.getCustomer().getCustomerType().equals("G")){
+			if(invoice.getCustomer() instanceof General){
 				System.out.println("\t[General]");
-			} else if(invoice.getCustomer().getCustomerType().equals("S")){
+			} else if(invoice.getCustomer() instanceof Student){
 				System.out.println("\t[Student]");
 			} else {
 				System.out.println("ERROR: customer type not found");
@@ -61,18 +61,35 @@ public class Report {
 			System.out.println(""); //code, item, subtotal, etc
 			
 			//call itemDetail on the item list
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			System.out.printf("Code       Item");
+			tab(17);
+			System.out.printf("Subtotal");
+			tab(2);
+			System.out.printf("Tax");
+			tab(2);
+			System.out.printf("Total");
+			newLine();
+			invoice.itemDetail();
+			newLine();
+			tab(20);
+			line(36);
+			System.out.printf("SUBTOTALS																	$		%f $		%f $		%f", invoice.getSubtotal(), invoice.getTaxes(), invoice.getTotal());
+			newLine();
+			if(invoice.getCustomer() instanceof Student){
+				System.out.printf("DISCOUNT (8% STUDENT & NO TAX)																				$		%f", invoice.getReimbursement());
+				newLine();
+				System.out.printf("ADDITIONAL FEE (Student)																						$		%f", invoice.getFees());
+				newLine();
+			}
+			System.out.printf("TOTAL");
+			tab(23);
+			System.out.println(invoice.getGrandTotal());
+			newLine(2);
+			System.out.println("Thank you for your purchase!");
+			newLine(3);		
 		}
 		
-	
+		line(148);
 	}
 	
 	
@@ -126,6 +143,13 @@ public class Report {
 		System.out.printf("\n");
 	}
 	
+	public void newLine(int n){
+		System.out.printf("\n");
+		if(n>0){
+			newLine(n-1);
+		}
+	}
+	
 	public void line(int n){
 		for (int i=0; i<n;i++){
 			System.out.printf("=");
@@ -140,6 +164,12 @@ public class Report {
 	public void thinLine(int n){
 		for (int i=0; i<n;i++){
 			System.out.printf("-");
+		}
+	}
+	
+	public void tab(int n){
+		for(int i=0; i<n;i++){
+			System.out.printf("\t");
 		}
 	}
 	//43
