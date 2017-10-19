@@ -102,15 +102,46 @@ public class Invoice {
 	// TODO check for all other methods of calculation!!
 	//TODO check for misc. methods needed
 	
+	public int numMovieTickets() {
+		int count = 0;
+		for(Product product : this.getProductList()) {
+			if(product instanceof MovieTicket) {
+				count = product.getUnits() + count;
+			}
+		}
+		return count;
+	}
+	public String movieTicketCode() {
+	
+		for(Product product : this.getProductList()) {
+			if(product instanceof MovieTicket || product instanceof SeasonPass) {
+				return product.getProductCode();
+			}
+		}
+		return null;
+	}
+	
 	public void itemDetail(){
 			
-		//season pass: check if it was prorated, for how many days
-		//refreshments: if 1+ ticket/season pass purchased, 5% discount
-		//parking pass: if movie ticket or season pass, parking ticket is free
+		
+		
 		for(Product product : this.productList){
-			if(product.getProductType().equals("M")){
-				MovieTicket movieTicket;
+			if(product instanceof MovieTicket){
+				/*
+				 * 
+				 * 
+				 * 
+				 * this shit right here |
+				 * 						|
+				 * 						|
+				 * 						V
+				 */
+				MovieTicket movieTicket = null;
 				movieTicket = (MovieTicket) product;
+				
+				
+				
+				
 				System.out.printf("%-15s MovieTicket '%s' @ %s %90s %-14f $ %-14f $ %-14f", 
 								movieTicket.getProductCode(), movieTicket.getMovieName(), movieTicket.getAddress().getStreet(),
 								"$", movieTicket.getSubtotal(this.invoiceDate)*movieTicket.getUnits(), movieTicket.getTax(this.invoiceDate)*movieTicket.getUnits(),
@@ -123,11 +154,104 @@ public class Invoice {
 					System.out.printf("%15s (%d units @ $%f/unit)", movieTicket.getDateTime(), movieTicket.getUnits(), movieTicket.getPricePerUnit());
 				}
 				System.out.printf("\n");
-			}
+				
+				
+			} else if(product instanceof ParkingPass){
+				/*
+				 * 
+				 * 
+				 * 
+				 * this shit right here |
+				 * 						|
+				 * 						|
+				 * 						V
+				 */
+				ParkingPass parkingPass = null;
+				//parkingPass = (ParkingPass) product;
+				
+				//ParkingPass parkingPass = product.returnItself();
+				Boolean movieTicketExists;
+				if(this.movieTicketCode() == null) {
+					movieTicketExists = false;
+				} else {
+					movieTicketExists = true;
+				}
+				
+				System.out.printf("%-15s ParkingPass", 
+								parkingPass.getProductCode(), parkingPass.getProductCode());
+				//movie ticket check
+				if(movieTicketExists) {
+					System.out.printf("%s (%d units @ $%.2f with %d free)", this.movieTicketCode(), parkingPass.getUnits(), parkingPass.getParkingFee(), this.numMovieTickets() );
+				} else {
+					System.out.printf("%s (%d units @ $%.2f)", this.movieTicketCode(), parkingPass.getUnits(), parkingPass.getParkingFee());
+				}
+				//subtotal, tax, total
+				//this.getTotal( PASS INT );
+				
+				System.out.printf("%90s %-15f $ %-15f $ %-15f", "$", parkingPass.getSubtotal(this.invoiceDate) * parkingPass.getUnits(), parkingPass.getTax(this.invoiceDate) * parkingPass.getUnits(), parkingPass.getTotal(this.numMovieTickets()));
+				System.out.println();
+			} else if(product instanceof SeasonPass){
+				/*
+				 * 
+				 * 
+				 * 
+				 * this shit right here |
+				 * 						|
+				 * 						|
+				 * 						V
+				 */
+				SeasonPass seasonPass = null;
+				seasonPass = (SeasonPass) product;
+				
+				
+				System.out.printf("%-15s SeasonPass - %s %90s %-14f $ %-14f $ %-14f", 
+								seasonPass.getProductCode(), seasonPass.getName(), "$",
+								seasonPass.getSubtotal(this.invoiceDate)*seasonPass.getUnits(), seasonPass.getTax(this.invoiceDate)*seasonPass.getUnits(),
+								seasonPass.getTotal(this.invoiceDate)*seasonPass.getUnits());
+				System.out.printf("\n");
+				
+				System.out.printf("(%d units @ $%f/unit + $%d fee/unit)", seasonPass.getUnits(), seasonPass.getCost(), 8);
+				
+				System.out.printf("\n");
+				
+				
+			} else if(product instanceof ParkingPass){
+				/*
+				 * 
+				 * 
+				 * 
+				 * this shit right here |
+				 * 						|
+				 * 						|
+				 * 						V
+				 */
+				Refreshment refreshment = null;
+				refreshment = (Refreshment) product;
+				Boolean movieTicketExists;
+				if(this.movieTicketCode() == null) {
+					movieTicketExists = false;
+				} else {
+					movieTicketExists = true;
+				}
+				
+				System.out.printf("%-15s refreshment", 
+								refreshment.getProductCode(), refreshment.getProductCode());
+				//movie ticket check
+				if(movieTicketExists) {
+					System.out.printf("%s (%d units @ $%.2f with %d free)", this.movieTicketCode(), refreshment.getUnits(), refreshment.getParkingFee(), this.numMovieTickets() );
+				} else {
+					System.out.printf("%s (%d units @ $%.2f)", this.movieTicketCode(), refreshment.getUnits(), refreshment.getParkingFee());
+				}
+				//subtotal, tax, total
+				//this.getTotal( PASS INT );
+				
+				System.out.printf("%90s %-15f $ %-15f $ %-15f", "$", refreshment.getSubtotal(this.invoiceDate) * refreshment.getUnits(), refreshment.getTax(this.invoiceDate) * refreshment.getUnits(), refreshment.getTotal(this.numMovieTickets()));
+				System.out.println();
+			} 
 			
-			//season pass
+			
 			//refreshments
-			//parking pass
+		
 			
 			
 			

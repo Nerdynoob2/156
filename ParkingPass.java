@@ -47,4 +47,8 @@ public class ParkingPass extends Service{
 		return this;
 	}
 	
+	public double getTotal(int numberMovieTickets) {
+		return (double)(this.getUnits() - numberMovieTickets) * this.parkingFee;
+	}
+	
 }

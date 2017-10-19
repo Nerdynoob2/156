@@ -98,7 +98,7 @@ public class SeasonPass extends Ticket{
 	
 	@Override
 	public double getSubtotal(String currentDate) {
-		return this.prorate(currentDate);
+		return this.prorate(currentDate) + 8;
 	}
 
 	@Override

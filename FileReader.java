@@ -118,9 +118,9 @@ import java.util.ArrayList;
 						
 						Customer newCustomer;
 						if(customerType.equals("S")){
-							newCustomer = new Student(customerCode, customerType, personObject, name, addressObject);
+							newCustomer = new Student(customerCode, "Student", personObject, name, addressObject);
 						} else {
-							newCustomer = new General(customerCode, customerType, personObject, name, addressObject);
+							newCustomer = new General(customerCode, "General", personObject, name, addressObject);
 						}
 						// Adds the Customer object into Customer ArrayList
 						customerList.add(newCustomer);

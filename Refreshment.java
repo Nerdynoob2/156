@@ -50,7 +50,7 @@ public class Refreshment extends Service{
 	}
 	
 	
-	//cost. duh
+	
 	@Override
 	public Refreshment returnItself() {
 		return this;

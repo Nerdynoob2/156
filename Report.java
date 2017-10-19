@@ -57,7 +57,19 @@ public class Report {
 			System.out.println("\t" + invoice.getCustomer().getAddress().getCity() + 
 					invoice.getCustomer().getAddress().getState() + invoice.getCustomer().getAddress().getZip() +
 					invoice.getCustomer().getAddress().getCountry());
-				
+			thinLine(43);
+			System.out.println(""); //code, item, subtotal, etc
+			
+			//call itemDetail on the item list
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		}
 		
 	
