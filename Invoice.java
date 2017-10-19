@@ -211,7 +211,7 @@ public class Invoice {
 				
 				//movie ticket check
 				if(movieTicketExists) {
-					System.out.printf("(%d units @ $%.2f with 5% off)", refreshment.getUnits(), refreshment.getCost());
+					System.out.printf("(%d units @ $%.2f with 5%% off)", refreshment.getUnits(), refreshment.getCost());
 					refreshment.setCost(refreshment.getCost()*.95);
 				} else {
 					System.out.printf("(%d units @ $%.2f)", refreshment.getUnits(), refreshment.getCost());

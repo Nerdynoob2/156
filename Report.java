@@ -5,26 +5,26 @@ public class Report {
 	public void summaryReport(ArrayList<Invoice> invoiceList){
 		System.out.println("Executive Summary Report");
 		line(24);
-		System.out.printf("%-10s %-50s %-30s %-15s %-15s %-15s %-15s %-15s",
+		System.out.printf("%-10s %-50s %-30s %-15s %-15s %-15s %-15s %-15s\n",
 				"Invoice", "Customer", "Salesperson", "Subtotal", "Fees",
 				"Taxes", "Discounts", "Total");
 		for(Invoice invoice : invoiceList){
-			if(invoice.getCustomer().getCustomerType().equals("G")){
-				System.out.printf("%-10s %-50s %-30s $ %-14d $ %-14d %-14d %-14d %-14d", 
+			if(invoice.getCustomer().getCustomerType().equals("General")){
+				System.out.printf("%-10s %-50s %-30s $ %-14.2f $ %-14.2f %-14.2f %-14.2f %-14.2f\n", 
 					invoice.getInvoiceCode(), invoice.getCustomer().getName() + "[General]", 
 					invoice.getSalesperson().getFullName(), invoice.getSubtotal(),
 					invoice.getFees(), invoice.getTaxes(), invoice.getReimbursement(), invoice.getTotal());
-			} else if(invoice.getCustomer().getCustomerType().equals("S")){
-				System.out.printf("%-10s %-50s %-30s $ %-14d $ %-14d %-14d %-14d %-14d", 
+			} else if(invoice.getCustomer().getCustomerType().equals("Student")){
+				System.out.printf("%-10s %-50s %-30s $ %-14.2f $ %-14.2f %-14.2f %-14.2f %-14.2f\n", 
 						invoice.getInvoiceCode(), invoice.getCustomer().getName() + "[Student]", 
 						invoice.getSalesperson().getFullName(), invoice.getSubtotal(),
 						invoice.getFees(), invoice.getTaxes(), invoice.getReimbursement(), invoice.getTotal());
 			}	else{
-				System.out.printf("Error: Customer Type not found");
+				System.out.printf("Error: Customer Type not found\n");
 			}
 		}
 		line(148);
-		System.out.printf("%-90s $ %-14d $ %-14d %-14d %-14d %-14d" , "TOTALS", 
+		System.out.printf("%-90s $ %-14.2f $ %-14.2f %-14.2f %-14.2f %-14.2f" , "TOTALS", 
 				this.subtotal(invoiceList), this.fees(invoiceList), 
 				this.taxes(invoiceList), this.discount(invoiceList), this.total(invoiceList) );
 		newLine();
@@ -154,6 +154,7 @@ public class Report {
 		for (int i=0; i<n;i++){
 			System.out.printf("=");
 		}
+		newLine();
 		//long: 148
 		//footer: 118
 		//medium: 50
@@ -165,6 +166,7 @@ public class Report {
 		for (int i=0; i<n;i++){
 			System.out.printf("-");
 		}
+		newLine();
 	}
 	
 	public void tab(int n){
