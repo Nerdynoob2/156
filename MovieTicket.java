@@ -1,5 +1,4 @@
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
 
 public class MovieTicket extends Ticket {
 
@@ -66,20 +65,20 @@ public class MovieTicket extends Ticket {
 	}
 
 	
-	public int discount(String currentDate) {
+	public int discount() {
 
 		
-		String data[] = currentDate.split("-");
-		
+		String temp[] = this.getDateTime().split(" ");
+		//"delete" the time, split into necessary data
+		String data[] = temp[0].split("-");
 		int year = Integer.parseInt(data[0]);
 		int month = Integer.parseInt(data[1]);
 		int date = Integer.parseInt(data[2]);
 		
-		Calendar startDate = new GregorianCalendar(year, month, date, 00, 00, 00);
+		LocalDate movieDate = LocalDate.of(year, month, date);
 		
-		int dayOfWeek = startDate.get(Calendar.DAY_OF_WEEK);
 		
-		if (dayOfWeek == 3 || dayOfWeek == 5){
+		if (movieDate.getDayOfWeek().name() == "TUESDAY" || movieDate.getDayOfWeek().name() == "THURSDAY"){
 			return 1;
 		}
 		else {
@@ -91,16 +90,16 @@ public class MovieTicket extends Ticket {
 	
 	@Override
 	public double getSubtotal(String currentDate) {
-		if (this.discount(currentDate)==1) {
-			return this.pricePerUnit * .93;
+		if (this.discountCheck()) {
+			return this.pricePerUnit * .93 * this.getUnits();			
 		}
-		else {
-			return this.pricePerUnit;			
-		}
+		else if(!this.discountCheck()){
+			return this.pricePerUnit * this.getUnits();			
+		} else return 50000000;
 	}
 	
-	public Boolean discountCheck(String currentDate){
-		if(this.discount(currentDate)==1){
+	public Boolean discountCheck(){
+		if(this.discount()==1){
 			return true;
 		}
 		return false;

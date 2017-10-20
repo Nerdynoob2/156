@@ -25,15 +25,17 @@ public class ParkingPass extends Service{
 
 	@Override
 	public double getSubtotal(String currentDate) {
-		return this.parkingFee;
+		return this.parkingFee*this.getUnits();
 	}
 
 
 	@Override
 	public double getTax(String currentDate) {
-		return this.parkingFee * .04;
+		return this.parkingFee * .04 * this.getUnits();
 	}
-
+	public double getTax() {
+		return this.parkingFee * .04 * this.getUnits();
+	}
 
 	@Override
 	public double getTotal(String currentDate) {
@@ -48,7 +50,14 @@ public class ParkingPass extends Service{
 	}
 	
 	public double getTotal(int numberMovieTickets) {
-		return (double)(this.getUnits() - numberMovieTickets) * this.parkingFee;
+		
+		return this.getSubtotal(numberMovieTickets) + this.getTax(numberMovieTickets);
 	}
 	
+	public double getSubtotal(int numberMovieTickets) {
+		return numberMovieTickets * this.parkingFee;
+	}
+	public double getTax(int x) {
+		return getSubtotal(x) * .04;
+	}
 }

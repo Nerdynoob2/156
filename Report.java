@@ -10,21 +10,23 @@ public class Report {
 				"Taxes", "Discounts", "Total");
 		for(Invoice invoice : invoiceList){
 			if(invoice.getCustomer().getCustomerType().equals("General")){
-				System.out.printf("%-10s %-50s %-30s $ %-14.2f $ %-14.2f $ %-14.2f $ %-14.2f $ %-14.2f\n", 
-					invoice.getInvoiceCode(), invoice.getCustomer().getName() + "[General]", 
+				General g = (General)invoice.getCustomer();
+				System.out.printf("%-10s %-50s %-30s $ %7.2f      $ %7.2f      $ %7.2f      $ %7.2f      $ %7.2f\n", 
+					invoice.getInvoiceCode(), g.getName() + "[General]", 
 					invoice.getSalesperson().getFullName(), invoice.getSubtotal(),
-					invoice.getFees(), invoice.getTaxes(), invoice.getReimbursement(), invoice.getTotal());
+					invoice.getFees(), invoice.getTaxes(), invoice.getReimbursement(invoice.getCustomer().getCustomerType()), invoice.getGrandTotal());
 			} else if(invoice.getCustomer().getCustomerType().equals("Student")){
-				System.out.printf("%-10s %-50s %-30s $ %-14.2f $ %-14.2f $ %-14.2f $ %-14.2f $ %-14.2f\n", 
-						invoice.getInvoiceCode(), invoice.getCustomer().getName() + "[Student]", 
+				Student s = (Student)invoice.getCustomer();
+				System.out.printf("%-10s %-50s %-30s $ %7.2f      $ %7.2f      $ %7.2f      $ %7.2f      $ %7.2f\n", 
+						invoice.getInvoiceCode(), s.getName() + "[Student]", 
 						invoice.getSalesperson().getFullName(), invoice.getSubtotal(),
-						invoice.getFees(), invoice.getTaxes(), invoice.getReimbursement(), invoice.getTotal());
+						invoice.getFees(), invoice.getTaxes(), invoice.getReimbursement(invoice.getCustomer().getCustomerType()), invoice.getGrandTotal());
 			}	else{
 				System.out.printf("Error: Customer Type not found\n");
 			}
 		}
 		line(170);
-		System.out.printf("%-92s $ %-14.2f $ %-14.2f $ %-14.2f $ %-14.2f $ %-14.2f" , "TOTALS", 
+		System.out.printf("%-92s $ %7.2f      $ %7.2f      $ %7.2f      $ %7.2f      $ %7.2f" , "TOTALS", 
 				this.subtotal(invoiceList), this.fees(invoiceList), 
 				this.taxes(invoiceList), this.discount(invoiceList), this.total(invoiceList) );
 		newLine();
@@ -58,38 +60,37 @@ public class Report {
 					invoice.getCustomer().getAddress().getState() + " " +invoice.getCustomer().getAddress().getZip() + " " +
 					invoice.getCustomer().getAddress().getCountry());
 			thinLine(43);
-			System.out.println(""); //code, item, subtotal, etc
+			 //code, item, subtotal, etc
 			
 			//call itemDetail on the item list
 			System.out.printf("Code       	Item");
-			tab(17);
+			tab(11);
 			System.out.printf("Subtotal");
-			tab(2);
+			tab(1);
 			System.out.printf("Tax");
-			tab(2);
+			tab(1);
 			System.out.printf("Total");
 			newLine();
 			invoice.itemDetail();
+			tab(12);
+			line(44);
+			System.out.printf("SUBTOTALS        							      			     $ %7.2f       $ %7.2f  $ %7.2f", invoice.getSubtotal(), invoice.getTaxes(), invoice.getTotal());
 			newLine();
-			tab(20);
-			line(36);
-			System.out.printf("SUBTOTALS											$		%.2f $		%.2f $		%.2f", invoice.getSubtotal(), invoice.getTaxes(), invoice.getTotal());
-			newLine();
-			if(invoice.getCustomer() instanceof Student){
-				System.out.printf("DISCOUNT (8% STUDENT & NO TAX)										$		%.2f", invoice.getReimbursement());
+			if(invoice.getCustomer().getCustomerType().equals("Student")){
+				System.out.printf("DISCOUNT (8%% STUDENT & NO TAX)													$ %7.2f", invoice.getReimbursement(invoice.getCustomer().getCustomerType()));
 				newLine();
-				System.out.printf("ADDITIONAL FEE (Student)												$		%.2f", invoice.getFees());
+				System.out.printf("ADDITIONAL FEE (Student)													$ %7.2f", invoice.getFees());
 				newLine();
 			}
 			System.out.printf("TOTAL");
-			tab(15);
-			System.out.println(invoice.getGrandTotal());
-			newLine(2);
+			tab(16);
+			System.out.printf("$ %7.2f", invoice.getGrandTotal());
+			newLine(3);
 			System.out.println("Thank you for your purchase!");
 			newLine(3);		
 		}
 		
-		line(148);
+		line(150);
 	}
 	
 	
@@ -124,7 +125,15 @@ public class Report {
 	public double discount(ArrayList<Invoice> invoiceList){
 		double sum = 0;
 		for(Invoice invoice : invoiceList){
-			sum = sum + invoice.getReimbursement();
+			sum = sum + invoice.getReimbursement(invoice.getCustomer().getCustomerType());
+		}
+		return sum;
+	}
+	
+	public double reimbursement(ArrayList<Invoice> invoiceList) {
+		double sum =0;
+		for(Invoice invoice : invoiceList) {
+			sum = sum + invoice.getDiscounts();
 		}
 		return sum;
 	}
@@ -155,10 +164,10 @@ public class Report {
 			System.out.printf("=");
 		}
 		newLine();
-		//long: 148
+		//long: 28
 		//footer: 118
 		//medium: 50
-		//subtotal: 36
+		//subtotal: 37
 		//short: 24
 	}
 	

@@ -172,7 +172,7 @@ import java.util.ArrayList;
 							String screenNo = data[5];
 							double pricePerUnit = Double.parseDouble(data[6]);
 							//create movie ticket object
-							newProduct = new MovieTicket(code, type, dateTime, movieName, addressObject, screenNo, pricePerUnit);
+							newProduct = new MovieTicket(code, type, dateTime, "'" + movieName + "'", addressObject, screenNo, pricePerUnit);
 							
 						}else if(data.length == 6){
 							String name = data[2];
@@ -241,10 +241,12 @@ import java.util.ArrayList;
 						for (Customer aCustomer : customerList) {
 							
 							if(aCustomer.getCustomerCode().equals(customerCode)) {
-								if(aCustomer.getCustomerType().equals("S")){
-									customerObject = new Student(aCustomer.getCustomerCode(), aCustomer.getCustomerType(), aCustomer.getContactPerson(), aCustomer.getName(), aCustomer.getAddress());
+								if(aCustomer.getCustomerType().equals("Student")){
+									Student s = (Student) aCustomer;
+									customerObject = new Student(s.getCustomerCode(), s.getCustomerType(), s.getContactPerson(), s.getName(), s.getAddress());
 								} else {
-									customerObject = new General(aCustomer.getCustomerCode(), aCustomer.getCustomerType(), aCustomer.getContactPerson(), aCustomer.getName(), aCustomer.getAddress());
+									General g = (General) aCustomer;
+									customerObject = new General(g.getCustomerCode(), g.getCustomerType(), g.getContactPerson(), g.getName(), g.getAddress());
 								}
 							}
 						}
@@ -256,25 +258,36 @@ import java.util.ArrayList;
 							String productListTokenized[] = test.split(":");
 							String objectCode = productListTokenized[0];
 							int count = Integer.parseInt(productListTokenized[1]);
-							//separate object type and number of objects
-							//instantiate an object n times, n=number of objects
-							/*
-							 * 
-							 * 
-							 * 
-							 * Probably broken below :/
-							 * 
-							 * (need to find a way to read a product from productList
-							 * 	then copy or add that product to the local productList 
-							 * 	specific to the invoice)
-							 * 
-							 * 
-							 */
+
+							
+							
+							
+							//successfully scan in a COPY of the object from the list (DEEP COPY)
 							for(Product testProduct : productList) {
 								if(testProduct.getProductCode().equals(objectCode)){
-								
-										productListLocal.add(testProduct);
-										testProduct.setUnits(count);
+										Product newProduct = null;
+										if(testProduct instanceof MovieTicket) {
+											MovieTicket m = (MovieTicket) testProduct;
+											newProduct = new MovieTicket(m.getProductCode(), m.getProductType(),
+													m.getDateTime(), m.getMovieName(), m.getAddress(), m.getScreenNumber(),
+													m.getPricePerUnit());
+										
+										} else if (testProduct instanceof ParkingPass) {
+											ParkingPass p = (ParkingPass)testProduct;
+											newProduct = new ParkingPass(p.getProductCode(), p.getProductType(), p.getParkingFee());
+											
+										} else if (testProduct instanceof Refreshment) {
+											Refreshment r = (Refreshment) testProduct;
+											newProduct = new Refreshment(r.getProductCode(), r.getProductType(), r.getName(), r.getCost());
+											
+										} else if (testProduct instanceof SeasonPass) {
+											SeasonPass s = (SeasonPass) testProduct;
+											newProduct = new SeasonPass(s.getProductCode(), s.getProductType(), s.getName(), s.getStartDate(),
+													s.getEndDate(), s.getCost());
+										}
+										productListLocal.add(newProduct);
+										newProduct.setUnits(count);
+										
 									
 								}
 							}
