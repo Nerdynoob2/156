@@ -1,72 +1,14 @@
-public abstract class Customer {
-	private String customerCode;//alpha-numerics
-	private String customerType;
-	private Person contactPerson;//person assigned as a contact
-	private String name;
-	private Address address;
-	
-	
-	//Constructor
-	public Customer(String customerCode, String customerType, Person contactPerson, String name, Address address){
-		this.customerType = customerType;
-		this.customerCode = customerCode;
-		this.contactPerson = contactPerson;
-		this.name = name;
-		this.address = address;
-	}
-	//setters
-	public void setCustomerCode(String customerCode){
-		this.customerCode = customerCode;
-	}
-	
-	
-	public void setPersonContact(Person contactPerson){
-		this.contactPerson = contactPerson;
-	}
-	public void setName(String name){
-		this.name = name;
-	}
-	
-	public void setAddress(Address address){
-		this.address = address;
-	}
-	
-	
-	
-	
-	public String getCustomerType() {
-		return customerType;
-	}
-	public void setCustomerType(String customerType) {
-		this.customerType = customerType;
-	}
-	public void setContactPerson(Person contactPerson) {
-		this.contactPerson = contactPerson;
-	}
-	
-	//getters
-	public String getCustomerCode(){
-		return this.customerCode;
-	}
-	
-	public Person getContactPerson(){
-		return this.contactPerson;
-	}
-	
-	
-	public String getName(){
-		return this.name;
-	}
-	
-	public Address getAddress(){
-		return this.address;
-	}
-	
-	
+public interface Customer {
+		
 	//TODO calculate reimbursement (nonexistent for General)
-	public abstract double getDiscount();
+	double getDiscount();
 	//TODO calculating fees (nonexistent for General)
-	public abstract double getFee();
+	double getFee();
 	
-	
+	//necessary to properly index and access from ArrayLists
+	String getCustomerCode();
+	String getCustomerType();
+	Person getContactPerson();
+	String getName();
+	Address getAddress();
 }

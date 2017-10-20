@@ -34,21 +34,29 @@ public class Refreshment extends Service{
 
 	@Override
 	public double getSubtotal(String currentDate) {
-		return this.cost;
+		return this.cost*this.getUnits();
 	}
-
-
+	public double getSubtotal(Boolean b) {
+		if(b) {
+			return this.cost*this.getUnits()*.95;
+		}
+		else return this.cost*this.getUnits();
+	}
 	@Override
 	public double getTax(String currentDate) {
-		return this.cost * .04;
+		return this.cost * .04*this.getUnits();
 	}
-
+	public double getTax(Boolean b) {
+		return this.getSubtotal(b) * .04;
+	}
 
 	@Override
 	public double getTotal(String currentDate) {
 		return this.getSubtotal(currentDate) + this.getTax(currentDate);
 	}
-	
+	public double getTotal(Boolean b) {
+		return this.getSubtotal(b) + this.getTax(b);
+	}
 	
 	
 	@Override
