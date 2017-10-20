@@ -10,12 +10,12 @@ public class Report {
 				"Taxes", "Discounts", "Total");
 		for(Invoice invoice : invoiceList){
 			if(invoice.getCustomer().getCustomerType().equals("General")){
-				System.out.printf("%-10s %-50s %-30s $ %-14.2f $ %-14.2f %-14.2f %-14.2f %-14.2f\n", 
+				System.out.printf("%-10s %-50s %-30s $ %-14.2f $ %-14.2f $ %-14.2f $ %-14.2f $ %-14.2f\n", 
 					invoice.getInvoiceCode(), invoice.getCustomer().getName() + "[General]", 
 					invoice.getSalesperson().getFullName(), invoice.getSubtotal(),
 					invoice.getFees(), invoice.getTaxes(), invoice.getReimbursement(), invoice.getTotal());
 			} else if(invoice.getCustomer().getCustomerType().equals("Student")){
-				System.out.printf("%-10s %-50s %-30s $ %-14.2f $ %-14.2f %-14.2f %-14.2f %-14.2f\n", 
+				System.out.printf("%-10s %-50s %-30s $ %-14.2f $ %-14.2f $ %-14.2f $ %-14.2f $ %-14.2f\n", 
 						invoice.getInvoiceCode(), invoice.getCustomer().getName() + "[Student]", 
 						invoice.getSalesperson().getFullName(), invoice.getSubtotal(),
 						invoice.getFees(), invoice.getTaxes(), invoice.getReimbursement(), invoice.getTotal());
@@ -23,8 +23,8 @@ public class Report {
 				System.out.printf("Error: Customer Type not found\n");
 			}
 		}
-		line(148);
-		System.out.printf("%-90s $ %-14.2f $ %-14.2f %-14.2f %-14.2f %-14.2f" , "TOTALS", 
+		line(170);
+		System.out.printf("%-92s $ %-14.2f $ %-14.2f $ %-14.2f $ %-14.2f $ %-14.2f" , "TOTALS", 
 				this.subtotal(invoiceList), this.fees(invoiceList), 
 				this.taxes(invoiceList), this.discount(invoiceList), this.total(invoiceList) );
 		newLine();
@@ -54,14 +54,14 @@ public class Report {
 			}
 			System.out.println("\t" + invoice.getCustomer().getContactPerson().getFullName());	
 			System.out.println("\t" + invoice.getCustomer().getAddress().getStreet());
-			System.out.println("\t" + invoice.getCustomer().getAddress().getCity() + 
-					invoice.getCustomer().getAddress().getState() + invoice.getCustomer().getAddress().getZip() +
+			System.out.println("\t" + invoice.getCustomer().getAddress().getCity() + " " +
+					invoice.getCustomer().getAddress().getState() + " " +invoice.getCustomer().getAddress().getZip() + " " +
 					invoice.getCustomer().getAddress().getCountry());
 			thinLine(43);
 			System.out.println(""); //code, item, subtotal, etc
 			
 			//call itemDetail on the item list
-			System.out.printf("Code       Item");
+			System.out.printf("Code       	Item");
 			tab(17);
 			System.out.printf("Subtotal");
 			tab(2);
@@ -73,16 +73,16 @@ public class Report {
 			newLine();
 			tab(20);
 			line(36);
-			System.out.printf("SUBTOTALS																	$		%f $		%f $		%f", invoice.getSubtotal(), invoice.getTaxes(), invoice.getTotal());
+			System.out.printf("SUBTOTALS											$		%.2f $		%.2f $		%.2f", invoice.getSubtotal(), invoice.getTaxes(), invoice.getTotal());
 			newLine();
 			if(invoice.getCustomer() instanceof Student){
-				System.out.printf("DISCOUNT (8% STUDENT & NO TAX)																				$		%f", invoice.getReimbursement());
+				System.out.printf("DISCOUNT (8% STUDENT & NO TAX)										$		%.2f", invoice.getReimbursement());
 				newLine();
-				System.out.printf("ADDITIONAL FEE (Student)																						$		%f", invoice.getFees());
+				System.out.printf("ADDITIONAL FEE (Student)												$		%.2f", invoice.getFees());
 				newLine();
 			}
 			System.out.printf("TOTAL");
-			tab(23);
+			tab(15);
 			System.out.println(invoice.getGrandTotal());
 			newLine(2);
 			System.out.println("Thank you for your purchase!");

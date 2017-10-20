@@ -137,16 +137,16 @@ public class Invoice {
 				
 				
 				
-				System.out.printf("%-15s MovieTicket '%s' @ %s %90s %-14f $ %-14f $ %-14f", 
+				System.out.printf("%-15s MovieTicket '%s' @ %s %60s %-14.2f $ %-14.2f $ %-14.2f", 
 								movieTicket.getProductCode(), movieTicket.getMovieName(), movieTicket.getAddress().getStreet(),
 								"$", movieTicket.getSubtotal(this.invoiceDate)*movieTicket.getUnits(), movieTicket.getTax(this.invoiceDate)*movieTicket.getUnits(),
 								movieTicket.getTotal(this.invoiceDate)*movieTicket.getUnits());
 				System.out.printf("\n");
 				if(movieTicket.discountCheck(this.invoiceDate)){
-					System.out.printf("%15s (%d units @ $%f/unit - Tue/Thu 7% off)", movieTicket.getDateTime(), movieTicket.getUnits(), movieTicket.getPricePerUnit());
+					System.out.printf("%15s (%d units @ $%.2f/unit - Tue/Thu 7% off)", movieTicket.getDateTime(), movieTicket.getUnits(), movieTicket.getPricePerUnit());
 				}
 				else{
-					System.out.printf("%15s (%d units @ $%f/unit)", movieTicket.getDateTime(), movieTicket.getUnits(), movieTicket.getPricePerUnit());
+					System.out.printf("\t\t%15s (%d units @ $%.2f/unit)", movieTicket.getDateTime(), movieTicket.getUnits(), movieTicket.getPricePerUnit());
 				}
 				System.out.printf("\n");
 				
@@ -168,14 +168,14 @@ public class Invoice {
 								parkingPass.getProductCode(), parkingPass.getProductCode());
 				//movie ticket check
 				if(movieTicketExists) {
-					System.out.printf("%s (%d units @ $%.2f with %d free)", this.movieTicketCode(), parkingPass.getUnits(), parkingPass.getParkingFee(), this.numMovieTickets() );
+					System.out.printf(" %s (%d units @ $%.2f with %d free)", this.movieTicketCode(), parkingPass.getUnits(), parkingPass.getParkingFee(), this.numMovieTickets() );
 				} else {
 					System.out.printf("%s (%d units @ $%.2f)", this.movieTicketCode(), parkingPass.getUnits(), parkingPass.getParkingFee());
 				}
 				//subtotal, tax, total
 				//this.getTotal( PASS INT );
 				
-				System.out.printf("%90s %-15f $ %-15f $ %-15f", "$", parkingPass.getSubtotal(this.invoiceDate) * parkingPass.getUnits(), parkingPass.getTax(this.invoiceDate) * parkingPass.getUnits(), parkingPass.getTotal(this.numMovieTickets()));
+				System.out.printf("%60s %-15.2f $ %-15.2f $ %-15.2f", "$", parkingPass.getSubtotal(this.invoiceDate) * parkingPass.getUnits(), parkingPass.getTax(this.invoiceDate) * parkingPass.getUnits(), parkingPass.getTotal(this.numMovieTickets()));
 				System.out.println();
 			} else if(product instanceof SeasonPass){
 				
@@ -183,13 +183,13 @@ public class Invoice {
 				seasonPass = (SeasonPass) product;
 				
 				
-				System.out.printf("%-15s SeasonPass - %s %90s %-14f $ %-14f $ %-14f", 
+				System.out.printf("%-15s SeasonPass - %s %60s %-14.2f $ %-14.2f $ %-14.2f", 
 								seasonPass.getProductCode(), seasonPass.getName(), "$",
 								seasonPass.getSubtotal(this.invoiceDate)*seasonPass.getUnits(), seasonPass.getTax(this.invoiceDate)*seasonPass.getUnits(),
 								seasonPass.getTotal(this.invoiceDate)*seasonPass.getUnits());
 				System.out.printf("\n");
 				
-				System.out.printf("(%d units @ $%f/unit + $%d fee/unit)", seasonPass.getUnits(), seasonPass.getCost(), 8);
+				System.out.printf("\t\t(%d units @ $%.2f/unit + $%d fee/unit)", seasonPass.getUnits(), seasonPass.getCost(), 8);
 				
 				System.out.printf("\n");
 				
@@ -206,7 +206,7 @@ public class Invoice {
 					movieTicketExists = true;
 				}
 				
-				System.out.printf("%s %-15s", 
+				System.out.printf("%-15s %s", 
 								refreshment.getProductCode(), refreshment.getName());
 				
 				//movie ticket check
@@ -218,43 +218,10 @@ public class Invoice {
 				}
 	
 				
-				System.out.printf("%90s %-15f $ %-15f $ %-15f", "$", refreshment.getSubtotal(this.invoiceDate) * refreshment.getUnits(), refreshment.getTax(this.invoiceDate) * refreshment.getUnits(), refreshment.getTotal(this.invoiceDate));
+				System.out.printf("%60s %-15.2f $ %-15.2f $ %-15.2f", "$", refreshment.getSubtotal(this.invoiceDate) * refreshment.getUnits(), refreshment.getTax(this.invoiceDate) * refreshment.getUnits(), refreshment.getTotal(this.invoiceDate));
 				System.out.println();
 			} 
-			
-			
-			
-		
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+
 		}
 	}
 	
