@@ -214,5 +214,98 @@ values
     ('816 Atlantic Street','Decatur','30030'),
     ('235 Illinois St.','Suitland','20746');
 
+insert into Address
+	(CityZipID, CountryStateID)
+values
+	(1,1),
+    (2,2),
+    (3,3),
+    (4,4),
+    (5,5),
+    (6,4),
+    (7,6),
+    (8,5),
+    (9,5),
+    (10,7),
+    (11,8),
+    (12,9),
+    (13,10),
+    (14,11),
+    (15,7),
+    (16,12),
+    (17,7),
+    (18,13),
+    (19,14),
+    (20,12),
+    (21,15),
+    (22,7),
+    (23,11),
+    (24,16),
+    (25,17),
+    (26,9),
+    (27,10),
+    (28,18),
+    (29,9);
 
+#trying to show all info address, not working
+#select Street, CityName, ZipCode, State, Country from Address a inner join CityZip cz on a.CityZipID = cz.CityZipID  inner join CountryState cs on a.CountryStateID = cs.CountryStateID;
+
+insert into Persons
+	(PersonCode, LastName,FirstName, AddressID)
+values
+	('cig','Morales','Bob',10),
+    ('832','Richardson', 'Dean',11),
+    ('fid','Hudson', 'Gwen',12),
+    ('2382','Norman', 'Marion',13),
+    ('aksj','Austin', 'Randolph',14),
+    ('cich','Quinn', 'Leslie',15),
+    ('diej','Higgins', 'Chris',16),
+    ('sisu','Pena', 'Vincent',17),
+    ('aisje','McCormick', 'Sidney',18),
+    ('fv8fq','Day', 'Otis',19),
+    ('viofu','Stokes', 'Rick',20),
+    ('skgn8','Cox', 'Ebony',21),
+    ('null','Burke', 'Alex',22),
+    ('9383s','Ramirez', 'Terrance',23),
+    ('tt194','Leonard', 'George',24),
+    ('j5k4l','Owens', 'Brad',25),
+    ('15','Vargas', 'Ethel',26),
+    ('hello','Sandoval', 'Kelley',27),
+    ('8178','Warner', 'Taylor',28),
+    ('198h','Fisher', 'Mona',29);
+
+insert into Email
+	(Email, PersonID)
+values
+	('jugalator@sbcglobal.net',5),
+    ('jfmulder@aol.com',6),
+    ('rnelson@att.net',7),
+    ('citizenl@me.com',8),
+    ('yzheng@outlook.com',9),
+    ('johndo@outlook.com',10),
+    ('eidac@gmail.com',11),
+    ('drolsky@verizon.net',11),
+    ('kramulous@msn.com',12),
+    ('barlow@yahoo.ca',12),
+    ('dmiller@aol.com',13),
+    ('crowl@aol.com',13),
+    ('calin@yahoo.ca',14),
+    ('msherr@comcast.net',14),
+    ('mlewan@aol.com',15),
+    ('pajas@live.com',15),
+    ('josephw@icloud.com',16),
+    ('eegsa@msn.com',16),
+    ('jdhildeb@me.com',17),
+    ('benanov@msn.com',17),
+    ('gilmoure@icloud.com',18),
+    ('skajan@icloud.com',18),
+    ('mcast@gmail.com',18),
+    ('granboul@optonline.net',19),
+    ('dsowsy@att.net',19),
+    ('pspoole@yahoo.com',19),
+    ('osaru@yahoo.ca',20),
+    ('scarlet@yahoo.com',20),
+    ('pfitza@live.com',20);
+    
+    
     
