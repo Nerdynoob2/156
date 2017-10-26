@@ -3,7 +3,7 @@ drop table if exists Invoice;
 drop table if exists Refreshment;
 drop table if exists ParkingPass;
 drop table if exists SeasonPass;
-drop table if exists MovieTickets;
+drop table if exists MovieTicket;
 drop table if exists CustomerPersons;
 drop table if exists Customers;
 drop table if exists Email;
@@ -16,7 +16,7 @@ drop table if exists CountryState;
 create table CountryState(
 CountryStateID int not null auto_increment,
 primary key (CountryStateID),
-StateName varchar (50),
+StateName varchar (50) unique,
 CountryName varchar (50)
 );
 
@@ -84,10 +84,10 @@ foreign key (PersonID) references Persons(PersonID)
 
 
 
-drop table if exists MovieTickets;
-create table MovieTickets(
-MovieTicketsID int not null auto_increment,
-primary key (MovieTicketsID),
+drop table if exists MovieTicket;
+create table MovieTicket(
+MovieTicketID int not null auto_increment,
+primary key (MovieTicketID),
 MovieCode varchar (10),
 DayAndTime datetime,
 MovieTitle varchar (250),
@@ -323,7 +323,7 @@ values
     (6,15),
     (7,13);
 
-insert into MovieTickets
+insert into MovieTicket
 	(MovieCode, DayAndTime, MovieTitle, AddressID, Screen, MovieTicketsCost)
 values
 	('gr93','2017-05-16 17:30:00','Lord of the Rings',8,'16A',8.75),
