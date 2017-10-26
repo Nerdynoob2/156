@@ -93,7 +93,7 @@ DayAndTime datetime,
 MovieTitle varchar (250),
 AddressID INT NULL,
 foreign key (AddressID) references Address(AddressID),
-Screen varchar (2),
+Screen varchar (5),
 MovieTicketsCost decimal (6,2)
 );
 
@@ -144,14 +144,8 @@ ProductOrderID int not null auto_increment,
 primary key (ProductOrderID),
 InvoiceID INT NULL,
 foreign key (InvoiceID) references Invoice(InvoiceID),
-MovieTicketsID INT NULL,
-foreign key (MovieTicketsID) references MovieTickets(MovieTicketsID),
-SeasonPassID INT NULL,
-foreign key (SeasonPassID) references SeasonPass(SeasonPassID),
-ParkingPassID INT NULL,
-foreign key (ParkingPassID) references ParkingPass(ParkingPassID),
-RefreshmentID INT NULL,
-foreign key (RefreshmentID) references Refreshment(RefreshmentID),
+ProductType varchar (25),
+ProductID int,
 Quantity int
 );
 
@@ -307,5 +301,78 @@ values
     ('scarlet@yahoo.com',20),
     ('pfitza@live.com',20);
     
+insert into Customers
+	(CustomerCode, CustomerType, CompanyName, AddressID)
+values
+	('A110','Student',"Billy Joe's Metalsmithy",1),
+    ('A111','General','Absolute Nothing, Incorporated',2),
+    ('A112','General','Information Systems and Networks',3),
+    ('A113','Student','Outback Steakhaus',4),
+    ('A114','General','University of Nebraska',5),
+    ('A115','Student','Target',6),
+    ('A116','Student','nullInc',7);
+   
+insert into CustomerPersons
+	(CustomerID, PersonID)
+values
+	(1,20),
+    (2,19),
+    (3,18),
+    (4,17),
+    (5,16),
+    (6,15),
+    (7,13);
+
+insert into MovieTickets
+	(MovieCode, DayAndTime, MovieTitle, AddressID, Screen, MovieTicketsCost)
+values
+	('gr93','2017-05-16 17:30:00','Lord of the Rings',8,'16A',8.75),
+    ('gbw3','2017-09-28 18:00:00','Hook',9,'7C',6.50);
+    
+insert into SeasonPass
+	(SeasonPassCode, SeasonPassName, StartDate, EndDate, SeasonPassCost)
+values
+	('4d81','Christmas Special','2017-11-21','2018-01-12',95.00),
+    ('71e8','Halloween Spooky Deal','2017-10-01','2017-11-08',50.00);
+
+insert into ParkingPass
+	(ParkingPassCode, ParkingPassCost)
+values
+	('d7a9',35.00),
+    ('v6he',15.00),
+    ('vl51',25.00);
+
+insert into Refreshment
+	(RefreshmentCode, RefreshmentName, RefreshmentCost)
+values
+	('c3sd','Raisinets',3.00),
+    ('ts6h','Buttered Popcorn Large',8.50),
+    ('scg5','Skittles',2.50),
+    ('32kj','Hops Rising',5.00);
+    
+insert into Invoice
+	(InvoiceCode, CustomerID, SalePerson, DateOfPurchase)
+values
+	('INV001',5,9,'2017-06-21'),
+    ('INV002',7,15,'2017-09-28'),
+    ('INV003',4,5,'2017-11-1'),
+    ('INV004',2,2,'2017-05-31');
+    
+insert into ProductOrder
+	(InvoiceID, ProductType, ProductID, Quantity)
+values
+	(1,'Refreshment',1,4),
+    (1,'MovieTickets',1,6),
+    (1,'ParkingPass',2,2),
+    (1,'Refreshment',4,2),
+    (2,'ParkingPass',3,4),
+    (2,'Refreshment',2,7),
+    (2,'MovieTickets',2,3),
+    (3,'SeasonPass',2,15),
+    (3,'MovieTickets',2,20),
+    (3,'Refreshment',2,23),
+    (4,'ParkingPass',1,2),
+    (4,'Refreshment',3,6);
+
     
     
