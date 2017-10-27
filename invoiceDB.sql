@@ -94,7 +94,7 @@ MovieTitle varchar (250),
 AddressID INT NULL,
 foreign key (AddressID) references Address(AddressID),
 Screen varchar (5),
-MovieTicketsCost decimal (6,2)
+MovieTicketCost decimal (6,2)
 );
 
 drop table if exists SeasonPass;
@@ -324,7 +324,7 @@ values
     (7,13);
 
 insert into MovieTicket
-	(MovieCode, DayAndTime, MovieTitle, AddressID, Screen, MovieTicketsCost)
+	(MovieCode, DayAndTime, MovieTitle, AddressID, Screen, MovieTicketCost)
 values
 	('gr93','2017-05-16 17:30:00','Lord of the Rings',8,'16A',8.75),
     ('gbw3','2017-09-28 18:00:00','Hook',9,'7C',6.50);
@@ -362,17 +362,14 @@ insert into ProductOrder
 	(InvoiceID, ProductType, ProductID, Quantity)
 values
 	(1,'Refreshment',1,4),
-    (1,'MovieTickets',1,6),
+    (1,'MovieTicket',1,6),
     (1,'ParkingPass',2,2),
     (1,'Refreshment',4,2),
     (2,'ParkingPass',3,4),
     (2,'Refreshment',2,7),
-    (2,'MovieTickets',2,3),
+    (2,'MovieTicket',2,3),
     (3,'SeasonPass',2,15),
-    (3,'MovieTickets',2,20),
+    (3,'MovieTicket',2,20),
     (3,'Refreshment',2,23),
     (4,'ParkingPass',1,2),
     (4,'Refreshment',3,6);
-
-    
-    
