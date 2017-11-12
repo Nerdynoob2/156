@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.lang.Comparable;
 
-public class Invoice {
+public class Invoice implements Comparable<Invoice>{
 	
 	
 	private String invoiceCode;
@@ -315,5 +316,18 @@ public class Invoice {
 
 		}
 	}
+	@Override
+	public int compareTo(Invoice invoice){
+		if(this.getGrandTotal()==invoice.getGrandTotal()){
+			return 0;
+		}
+		else if(this.getGrandTotal() > invoice.getGrandTotal()){
+			return 1;
+		}
+		else{
+			return -1;
+		}
+	}
+
 	
 }
