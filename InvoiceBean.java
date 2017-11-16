@@ -5,10 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
+
 public class InvoiceBean {
 
 	
-	public Invoice getAllInvoice(String invoiceCode)
+	public InvoiceProc getInvoiceProc(String invoiceCode)
 	{
 		String query = "Get invoice";
 		Connection conn = API.getConnection();
@@ -16,12 +17,12 @@ public class InvoiceBean {
 		try
 		{
 			PreparedStatement ps = conn.prepareStatement(query);
-			ps.setString(1, albumTitle);
+			ps.setString(1, invoiceCode);
 			ResultSet rs = ps.executeQuery();
 			
 			rs.next();
 			conn.close();
-			return this.getInvoice(rs.getInt("AlbumID"));
+			return this.getInvoiceProc(rs.getInt("InvoiceID"));
 		}
 		catch (SQLException e)
 		{
@@ -32,10 +33,10 @@ public class InvoiceBean {
 		
 	}
 	
-	public Invoice getAllInvoice(int albumID){
+	public InvoiceProc getInvoiceProc(int InvoiceID){
 		
 
-		Invoice a = new Invoice();
+		InvoiceProc a = new InvoiceProc();
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -64,28 +65,25 @@ public class InvoiceBean {
 		}
 		
 
-		String query = "SELECT AlbumTitle, AlbumYear, BandID, AlbumNumber FROM Albums where AlbumID = ?";
+		String query = "Stuff";
 
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
 		try {
 			ps = conn.prepareStatement(query);
-			ps.setInt(1, albumID);
+			ps.setInt(1, InvoiceID);
 			rs = ps.executeQuery();
-			if(rs.next()) {
-				a.setAlbumId(albumID);
-				a.setTitle(rs.getString("AlbumTitle"));
-				a.setYear(rs.getInt("AlbumYear"));
-				a.setAlbumNumber(rs.getInt("AlbumNumber"));
-				BandBean bb = new BandBean();
-				Band b = bb.getBand(rs.getInt("BandID"));
-				a.setBand(b);
+			while(rs.next()) {
+				//a.getMembers().add( new Member(rs.getString("InvoiceCode"), rs.getString("CustomerID"), rs.getString("SalePerson") ) );
 			}
+			rs.close();
 		} catch (SQLException e) {
 			System.out.println("SQLException: ");
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
-	
+		return a;
+	}
 }
+	
