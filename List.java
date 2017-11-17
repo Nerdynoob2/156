@@ -26,19 +26,6 @@ public class List<T extends Comparable<T>> implements Iterable<Node<T>>{
 			this.remove(0);
 		}
     }
-
-    //adds new node to end of list
-    public void addToEnd(T t) {
-    	Node<T> newNode = new Node<T>(t);
-    	size++;
-    	if(isEmpty()){
-    		start = newNode;
-    		end = start;	
-    	} else{
-    		end.setNext(newNode);
-    		end = newNode;
-    	}
-    }
     
     //adds new node, automatically ordering by invoice total
     public void add(T t){
@@ -49,15 +36,21 @@ public class List<T extends Comparable<T>> implements Iterable<Node<T>>{
     		size++;
     		return;
     	}
-    	for(Node<T> node : this){
-    		if(
-    			NewNode.compareTo(node) >= 0){
-        		
-        	}
+    	Node<T> currentNode = this.start;
+    	for(int i=0; i<this.size-1; i++){
+    		if(newNode.compareTo(currentNode.getNext()) >= 0) {
+    			//add newNode to the next position
+    			newNode.setNext(currentNode.getNext());
+    			currentNode.setNext(newNode);
+    			return;
+    			
+    		}
+    		else{
+    			currentNode = currentNode.getNext();
+    		}
     	}
-    	
-    	//if negative, go on to next
-    	//otherwise, add at that position
+    	this.end.setNext(currentNode);
+    	this.end = currentNode;
     }
 
     //removes node from specified position
