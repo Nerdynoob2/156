@@ -2,11 +2,11 @@ import java.util.Iterator;
 
 public class ListIterator<T extends Comparable<T>> implements Iterator<Node<T>>{
 
-	private List<T> list;
+	private MyList<T> list;
 	private int position = 0;
 	
-	public ListIterator(List<T> list) {
-		this.list = list.getListCopy();
+	public ListIterator(MyList<T> list) {
+		this.list = list.getMyListCopy();
 	}
 
 	@Override

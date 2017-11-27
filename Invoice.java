@@ -5,9 +5,7 @@ public class Invoice implements Comparable<Invoice>{
 	
 	
 	private String invoiceCode;
-	//private String customerCode;
 	private Customer customer;
-	//private String salespersoncode;
 	private Person salesperson;
 	private String invoiceDate;
 	private ArrayList<Product> productList;
@@ -21,6 +19,14 @@ public class Invoice implements Comparable<Invoice>{
 		this.customer = customer;
 		this.salesperson = salesperson;
 		this.productList = productList;
+		this.invoiceDate = currentDate;
+	}
+	public Invoice(String invoiceCode, Customer customer, Person salesperson,
+			String currentDate) {
+		super();
+		this.invoiceCode = invoiceCode;
+		this.customer = customer;
+		this.salesperson = salesperson;
 		this.invoiceDate = currentDate;
 	}
 	

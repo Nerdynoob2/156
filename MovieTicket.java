@@ -9,7 +9,8 @@ public class MovieTicket extends Ticket {
 	private double pricePerUnit;
 
 	// Constructor
-	public MovieTicket(String productCode, String productType, String dateTime, String movieName, Address address,
+	public MovieTicket(String productCode, String productType, 
+			String dateTime, String movieName, Address address,
 			String screenNumber, double pricePerUnit) {
 		super(productCode, productType);
 		this.dateTime = dateTime;

@@ -12,6 +12,12 @@ public abstract class Product {
 		this.productType = productType;
 	}
 
+	public Product(String productCode, String productType, int units) {
+		this.productCode = productCode;
+		this.productType = productType;
+		this.units = units;
+	}
+	
 	public int getUnits() {
 		return units;
 	}
